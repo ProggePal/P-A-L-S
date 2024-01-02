@@ -47,13 +47,12 @@ jobs:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
               # Initiate deployment status
-      - name: Start Deployment
-        uses: bobheadxi/deployments@v0.4.3
-        id: deployment
-        with:
-          step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
-          env: Preview
+      # - name: Start Deployment
+      #   uses: bobheadxi/deployments@v1.4.0
+      #   id: deployment
+      #   with:
+      #     step: start
+      #     env: Preview
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -101,16 +100,15 @@ jobs:
           #vercel-args: '--prod' #Optional
           working-directory: public
 
-        # Update deployment status
-      - name: Update Deployment Status
-        uses: bobheadxi/deployments@v0.4.3
-        if: always()
-        with:
-          step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          env_url: ${{ steps.vercel-action.outputs.preview-url }}
+      #   # Update deployment status
+      # - name: Update Deployment Status
+      #   uses: bobheadxi/deployments@v1.4.0
+      #   if: always()
+      #   with:
+      #     step: finish
+      #     status: ${{ job.status }}
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      #     env_url: ${{ steps.vercel-action.outputs.preview-url }}
 
 
   deploy:

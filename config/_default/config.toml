@@ -1,6 +1,6 @@
 baseURL = "https://paalpe.github.io/P-A-L-S/"
 languageCode = "en-us"
-title = "PALS*"
+title = "PAL-S*"
 theme = "paper"
 
 
@@ -30,7 +30,7 @@ theme = "paper"
   ##monoDarkIcon = true                       # show monochrome dark mode icon
   ##gravatarCdn = 'GRAVATAR_CDN_LINK'         # e.g. 'https://cdn.v2ex.com/gravatar/'
   ##graphCommentId = "YOUR_GRAPH_COMMENT_ID"  # use graph comment (disqus alternative)
-  math = true                               # enable KaTeX math typesetting globally
+  math = true                           # enable KaTeX math typesetting globally
 
 [menu]
 

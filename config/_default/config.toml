@@ -1,4 +1,4 @@
-baseURL = "https://paalpe.github.io/P-A-L-S/"
+baseURL = "https://www.pal-s.no/"
 languageCode = "en-us"
 title = "PAL-S*"
 theme = "paper"
@@ -19,7 +19,7 @@ theme = "paper"
 
 
   # home page profile
-  avatar = 'https://file.notion.so/f/f/f084bc39-5206-4589-b3f1-e5326b056471/e2fe8664-16ba-4ba1-9e99-792b35ce8377/paalspedersen.jpg?id=30abee98-e994-4010-ad5d-e2477b97f2e4&table=block&spaceId=f084bc39-5206-4589-b3f1-e5326b056471&expirationTimestamp=1704326400000&signature=w5JRc-KJGRligttJwJZp_fXEkIfpIbPcTzCNmgkSsmo&downloadName=paalspedersen.jpg'                 # gravatar email or image url
+  avatar = 'https://tjpstyjkg4nucxxg.public.blob.vercel-storage.com/paalcrop.jpg'                 # gravatar email or image url
   name = 'Pål Sørvik Pedersen'
   bio = "My name is Pål and this is a blog i'm working on"
 

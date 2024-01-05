@@ -19,9 +19,9 @@ theme = "paper"
 
 
   # home page profile
-  avatar = 'https://tjpstyjkg4nucxxg.public.blob.vercel-storage.com/paalcrop.jpg'                 # gravatar email or image url
+  avatar = 'https://tjpstyjkg4nucxxg.public.blob.vercel-storage.com/paal-sorvik-pedersen-profile-pal-s-9WqOasUjT3p3bwHyXVAtTvNL5KUWGn.webp'                 # gravatar email or image url
   name = 'Pål Sørvik Pedersen'
-  bio = "My name is Pål and this is a blog i'm working on"
+  bio = "Notes, articles, and experiences gathered along the way of a business developer with a passion for technology"
 
 
   # misc
@@ -30,7 +30,7 @@ theme = "paper"
   ##monoDarkIcon = true                       # show monochrome dark mode icon
   ##gravatarCdn = 'GRAVATAR_CDN_LINK'         # e.g. 'https://cdn.v2ex.com/gravatar/'
   ##graphCommentId = "YOUR_GRAPH_COMMENT_ID"  # use graph comment (disqus alternative)
-  math = true                           # enable KaTeX math typesetting globally
+  ##math = true                           # enable KaTeX math typesetting globally
 
 [menu]
 
@@ -39,8 +39,8 @@ theme = "paper"
     name = "About"
     url = "/about/"
     weight = 10
-  [[menu.main]]
-    identifier = "contact"
-    name = "Contact"
-    url = "/contact/"
-    weight = 10
+ ## [[menu.main]]
+ ##   identifier = "contact"
+ ##   name = "Contact"
+ ##   url = "/contact/"
+ ##   weight = 10

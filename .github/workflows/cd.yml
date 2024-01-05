@@ -72,6 +72,8 @@ jobs:
       - name: Build with Hugo
         env: # Or as an environment variable
          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+         BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN}}
+         
         run: |
           npm install
           npm install --cpu=x64 --os=linux sharp

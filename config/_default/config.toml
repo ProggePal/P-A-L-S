@@ -19,7 +19,7 @@ theme = "paper"
 
 
   # home page profile
-  avatar = 'https://tjpstyjkg4nucxxg.public.blob.vercel-storage.com/paal-sorvik-pedersen-profile-pal-s-9WqOasUjT3p3bwHyXVAtTvNL5KUWGn.webp'                 # gravatar email or image url
+  avatar = 'https://tjpstyjkg4nucxxg.public.blob.vercel-storage.com/paal-sorvik-pedersen-profile-ruwslymkP92XZl1hpKLBHRM8yXQUIo.webp'                 # gravatar email or image url
   name = 'Pål Sørvik Pedersen'
   bio = "Notes, articles, and experiences gathered along the way of a business developer with a passion for technology"
 

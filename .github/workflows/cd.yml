@@ -74,6 +74,7 @@ jobs:
          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: |
           npm install
+          npm install --cpu=x64 --os=linux sharp
           npm start
           hugo
 

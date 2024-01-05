@@ -19,6 +19,11 @@ import katex from "katex";
 import { MdBlock } from "@pclouddev/notion-to-markdown/build/types";
 import path from "path";
 import { getContentFile } from "./file";
+import { getAllImageLinksFromPage, } from "./vercel_blob";
+import { downloadImage } from "./images-helpers/download";
+import { getImageFilename, getImageFullName } from "./images-helpers/notionImage";
+import { initLogger } from "./images-helpers/logger";
+import { list, put } from "@vercel/blob";
 require("katex/contrib/mhchem"); // modify katex module
 
 function getExpiryTime(blocks: MdBlock[], expiry_time: string | undefined = undefined): string | undefined {
@@ -31,7 +36,7 @@ function getExpiryTime(blocks: MdBlock[], expiry_time: string | undefined = unde
       const child_expiry_time = getExpiryTime(block.children, expiry_time)
       if (child_expiry_time) {
         if (expiry_time === undefined) expiry_time = child_expiry_time
-        else expiry_time = expiry_time < child_expiry_time? expiry_time : child_expiry_time
+        else expiry_time = expiry_time < child_expiry_time ? expiry_time : child_expiry_time
       }
     }
   }
@@ -106,7 +111,7 @@ export async function renderPage(page: PageObjectResponse, notion: Client) {
         nearest_expiry_time = expiry_time
       }
     }
-  } 
+  }
 
   // map page properties to front matter
   for (const property in page.properties) {
@@ -210,7 +215,7 @@ export async function renderPage(page: PageObjectResponse, notion: Client) {
   frontMatter.UPDATE_TIME = (new Date()).toISOString()
   // save nearest expiry time
   if (nearest_expiry_time) frontMatter.EXPIRY_TIME = nearest_expiry_time
- 
+
 
 
   return {
@@ -251,9 +256,62 @@ export async function savePage(
 
   const { title, pageString } = await renderPage(page, notion);
   const fileName = getFileName(title, page.id);
+
+  const NewPageString = await uploadImagesToVercelSwapLinks(title.replaceAll(' ', '-'), pageString)
+
   await sh(
     `hugo new "${mount.target_folder}/${fileName}"`,
     false
   );
-  fs.writeFileSync(`content/${mount.target_folder}/${fileName}`, pageString);
+  fs.writeFileSync(`content/${mount.target_folder}/${fileName}`, NewPageString);
+}
+
+
+async function uploadImagesToVercelSwapLinks(docName: string, pageString: string) {
+  initLogger()
+
+  let pageStringCopy = pageString
+
+
+  const links = await getAllImageLinksFromPage(pageString);
+
+  const staticImages = await list({ prefix: `static/${docName}/`, });
+
+  console.log('staticImages', staticImages)
+
+  for (const link of links) {
+    const fileName = getImageFilename(link.url);
+
+    //   // if file exists in static folder, skip
+    let foundFile = staticImages.blobs.find((file) => file.pathname.split('.')[0] === `static/${docName}/${fileName.split('.')[0]}`);
+
+    console.log(`${fileName}`)
+    console.log('foundFile', foundFile)
+    if (foundFile) {
+      console.log(`[Info] ${fileName} already exists in static folder, skipped.`)
+      pageStringCopy = pageStringCopy.replace(link.url, foundFile.url);
+      continue;
+    }
+
+    const dir = `static/${docName}/${fileName}`;
+    const imageDir = await downloadImage(dir, true, link.url);
+    console.log('saved Image', imageDir)
+    if (imageDir) {
+      const fileBuffer = fs.readFileSync(imageDir);
+      const newUrl = await put(
+        imageDir,
+        fileBuffer,
+        { addRandomSuffix: false, contentType: 'image/webp', access: 'public' }
+      );
+
+      console.log(`[Info] Swapped Image Url from ${link.url} to ${newUrl.url}`)
+      pageStringCopy = pageStringCopy.replace(link.url, newUrl.url)
+    } else {
+      console.log(`[Info] Failed to download image from ${link.url}`)
+
+    }
+
+  }
+
+  return pageStringCopy
 }

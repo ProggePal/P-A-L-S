@@ -5,5 +5,7 @@ resources
 .hugo_build.lock
 public
 content/*.md
+static/*
+coverage/*
 content/posts/*.md
 .vercel

@@ -31,7 +31,7 @@
   "dependencies": {
     "@notionhq/client": "^2.2.13",
     "@pclouddev/notion-to-markdown": "^2.7.5",
-    "@vercel/blob": "^0.16.1",
+    "@vercel/blob": "^0.22.1",
     "axios": "^1.6.4",
     "dotenv": "^16.3.1",
     "front-matter": "^4.0.2",
